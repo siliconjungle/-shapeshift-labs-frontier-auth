@@ -1,0 +1,65 @@
+{
+  "name": "@shapeshift-labs/frontier-auth",
+  "version": "0.1.0",
+  "description": "Frontier-native auth contracts, session gates, token plans, account-linking policy, runtime grants, and auth evidence for Frontier apps.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/siliconjungle/-shapeshift-labs-frontier-auth.git"
+  },
+  "homepage": "https://github.com/siliconjungle/-shapeshift-labs-frontier-auth#readme",
+  "bugs": {
+    "url": "https://github.com/siliconjungle/-shapeshift-labs-frontier-auth/issues"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./discord": {
+      "types": "./dist/discord.d.ts",
+      "import": "./dist/discord.js",
+      "default": "./dist/discord.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "benchmarks/package-bench.mjs"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "npm run build && npm run typecheck && node test/smoke.mjs && node test/discord.mjs && node test/fuzz.mjs --cases 600",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p test/tsconfig.json --noEmit",
+    "fuzz": "npm run build && node test/fuzz.mjs",
+    "bench": "npm run build && node --expose-gc benchmarks/package-bench.mjs --out benchmarks/results/frontier-auth-package-bench-latest.json",
+    "pack:dry": "npm pack --dry-run"
+  },
+  "keywords": [
+    "frontier",
+    "auth",
+    "authentication",
+    "authorization",
+    "session",
+    "oauth",
+    "oidc",
+    "webauthn",
+    "agent"
+  ],
+  "dependencies": {
+    "@shapeshift-labs/frontier": "0.1.9"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
